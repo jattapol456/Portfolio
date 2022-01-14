@@ -17,16 +17,16 @@ jobs:
       uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+        cache: 'yarn'
 
     - name: Install dependencies
-      run: npm install
+      run: yarn install
 
     - name: Build
-      run: npm run build
+      run: yarn run build
 
     - name: Generate
-      run: npm run generate
+      run: yarn run generate
 
     - name: Deploy
       uses: peaceiris/actions-gh-pages@v3
