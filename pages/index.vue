@@ -113,6 +113,9 @@ body
                                         .flex.pt-2.space-x-4
                                             img(src="~/static/img/nestjs.png" width="48px" height="48px")
                                             a.skill.text-lg Nest.Js
+                                        .flex.pt-2.space-x-4
+                                            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 48 48" width="48px" height="48px"><polygon fill="#40c4ff" points="26,4 6,24 12,30 38,4"/><polygon fill="#40c4ff" points="38,22 27,33 21,27 26,22"/><rect width="8.485" height="8.485" x="16.757" y="28.757" fill="#03a9f4" transform="rotate(-45.001 21 33)"/><polygon fill="#01579b" points="38,44 26,44 21,39 27,33"/><polygon fill="#084994" points="21,39 30,36 27,33"/></svg>
+                                            a.skill.text-lg Flutter
                             .flex
                                 .pt-10.pl-20
                                     a.text-xl Tools
@@ -132,37 +135,90 @@ body
                                         .flex.pt-2.space-x-4
                                             img(src="~/static/img/postman.png" width="48px" height="48px")
                                             a.skill.text-lg Postman
-                    
-
-
+        
         .container(id="Projects")
             .pt-20.text-center
                 a.text-4xl Projects
             .pl-48.pt-6
                 .flex    
+                    a.text-xl Work
+                hr.info.my-8
+                .grid.grid-cols-3.gap-4.pl-6
+                    .award
+                        img(src="~//static/img/madoobaan.jpg" class="h-60 w-96")
+                        p OneDee Solution Projects Madoobaan 
+
+            .pl-48.pt-10
+                .flex    
                     a.text-xl Awards
                 hr.info.my-8
-                .grid.grid-cols-3.gap-4.pl-2
+                .grid.grid-cols-3.gap-4.pl-6
                     .award
                         img(src="~//static/img/20scoops.jpg" class="h-60 w-96")
                         p Join the training with 20scoops company
+        
+
+        .container
+            .pt-20.text-center
+                a.text-4xl Contact
+            .wrapper
+                form(ref="form" @submit.prevent="sendEmail")
+                    .text-center
+                        p.text-black.text-4xl Email to Jattapol
+                    .regis.pl-60.pt-12
+                        .px-6.pt-5.items-center
+                            .pb-4.space-y-2
+                                p Name
+                                input(v-model="name" name="name" class="shadow appearance-none border rounded py-2 px-4 w-96 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text")
+                            .pb-4.space-y-2
+                                p Email
+                                input(v-model="email" name="email" class="shadow appearance-none border rounded py-2 px-4 w-96 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text")
+                            .pb-4.space-y-2
+                                p.text.black Message
+                                textarea(v-model="message" name="message" class="shadow appearance-none border rounded py-2 px-4 w-96 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text")
+                            .pb-4.pt-2
+                                button(type="submit" class="w-96 h-10 text-white ocus:outline-none bg-blue-1 focus:bg-blue-2 focus:ring focus:ring-blue-200 rounded") Send
+
         .container.py-10
-                
         .container
             .signature1
                 a(href="https://github.com/jattapol456") Github | 
                 a(href="https://gitlab.com/jattapol456") Gitlab 
-                .signature.pt-1
+                .pt-1
                     a Contact -> 
                     a(href="https://www.facebook.com/profile.php?id=100009528041096") Facebook | 
-                    a Jattapol.aom@gmail.com | 
                     a 0947256049 
                 
-
 </template>
 
 <script lang="js">
-export default {
+import emailjs from '@emailjs/browser';
+
+export default ({
+    data: () => {
+        return {
+            name: "",
+            email: "",
+            message: "",
+        }
+    },
+    
+    methods: {
+        sendEmail() {
+            this.name = "";
+            this.email = "";
+            this.message = "";
+            emailjs.sendForm('service_cp0vw2a', 'template_wl7qdwq', this.$refs.form, 'user_Gpso9qPkwC3lnyj3thmst')
+                .then((result) => {
+                    this.$refs.form.reset();
+                    this.name = "";
+                    this.email = "";
+                    this.message = "";
+                }, (error) => {
+                    console.log('FAILED...', error.text);
+                });
+        },
+    },
     mounted() {
         const B = document.getElementById('B')
         const G = document.getElementById('G')
@@ -182,10 +238,8 @@ export default {
             YR.style.left = value * -0.25 + 'px'
             about.style.marginTop  = value * -0.25 + 'px'
         })
-    }
-
-}
-
+    },
+})
 </script>
 
 <style lang="scss" scoped>
@@ -253,4 +307,21 @@ a {
 p {
     color: white;
 }
+.wrapper {	
+	margin-top: 80px;
+    margin-bottom: 80px;
+}
+form {
+    position: relative;
+    z-index: 1;
+    background: #FFFFFF;
+    max-width: 1000px;
+    margin: 0 auto 100px;
+    padding: 45px;
+    box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    p {
+        color: black;
+    }
+}
+
 </style>
