@@ -1,7 +1,7 @@
 <template lang="pug">
   header
-    .container.fixed.z-40
-      .w-full.h-16.shadow-md.flex.justify-around.items-center
+    .container.fixed.z-50.max-w-full
+      .h-16.shadow-md.flex.justify-around.items-center
         .flex.items-center
           .uppercase.font-bold.text-3xl 
             a Jattapol
